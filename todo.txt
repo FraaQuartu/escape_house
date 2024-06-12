@@ -1,0 +1,30 @@
+- Refactoring del codice
+    Richiama le variabili in modo che abbiano dei nomi espressivi
+    Definisci un oggetto (player)
+    Sposta il codice del player in un altro file
+- Gestisci le collisioni 
+    Temporaneamente disegna il bordo della mappa come un quadrato, e fai in modo di non uscire da questa
+- Crea la tilemap
+    Molto semplice per ora
+    Gestisci collisioni
+- Metti le immagini giuste
+    Sia per il giocatore che la tilemap
+- Animazione del personaggio
+    Potresti avere l'animazione dei passi
+    Inoltre ridireziona lo sguardo in base a dove ti stai muovendo
+- Rendi la tilemap più complicata
+- Metti una porta: quando ti avvicini ad essa deve comparire il messaggio "non puoi aprirla"
+- Metti un baule in cui c'è la chiave
+    Come apri il baule compare la scritta "hai trovato una chiave"
+    La sprire del baule cambia: ora è aperto
+    Ovviamente gestisci collisioni
+    Come arrivi alla porta puoi aprirla e finire il livello
+- Aggiungi un nemico che fa la guardia al baule
+    Inizialmente se ti guarda hai perso
+    Poi se ti guarda inizia a sparare: se ti prende hai perso (devi sviluppare i proiettili...)
+
+
+
+
+Extra (potrebbero essere utili se sviluppi ancora il videogioco)
+- Aggiungi un inventario, in cui controllare se hai la chiave
