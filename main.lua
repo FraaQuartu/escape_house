@@ -5,6 +5,9 @@ function love.load()
   player.y = 0
 
   -- Player velocity
+  player.dir = {}
+  player.dir.x = 0
+  player.dir.y = 0
   player.v = min_v
 
   -- Speed limits
@@ -25,14 +28,28 @@ function love.update(dt)
 
   -- Actual movement, by pressing arrow keys
   if love.keyboard.isDown("right") then
-    player.x = player.x + player.v * dt
+    player.dir.x = 1
+    player.dir.y = 0
+    -- player.x = player.x + player.v * dt
   elseif love.keyboard.isDown("left") then
-    player.x = player.x - player.v * dt
+    player.dir.x = -1
+    player.dir.y = 0
+    -- player.x = player.x - player.v * dt
   elseif love.keyboard.isDown("up") then
-    player.y = player.y - player.v * dt
+    player.dir.x = 0
+    player.dir.y = -1
+    -- player.y = player.y - player.v * dt
   elseif love.keyboard.isDown("down") then
-    player.y = player.y + player.v * dt
+    player.dir.x = 0
+    player.dir.y = 1
+    -- player.y = player.y + player.v * dt
+  else
+    player.dir.x = 0
+    player.dir.y = 0
   end
+
+  player.x = player.x + player.v * player.dir.x * dt
+  player.y = player.y + player.v * player.dir.y * dt
 end
 
 function love.draw()
