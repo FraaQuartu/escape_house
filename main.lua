@@ -1,18 +1,18 @@
 function love.load()
+  -- Import library
+  vector = require("vector")
+
   -- Player position
   player = {}
-  player.x = 0
-  player.y = 0
-
-  -- Player velocity
-  player.dir = {}
-  player.dir.x = 0
-  player.dir.y = 0
-  player.v = min_v
+  player.pos = vector(0, 0)
 
   -- Speed limits
   min_v = 5
   max_v = 10
+
+  -- Player velocity and direction
+  player.dir = vector(0,0)
+  player.v = min_v
 
   -- Size of the tilemap
   unit = 32
@@ -28,31 +28,21 @@ function love.update(dt)
 
   -- Actual movement, by pressing arrow keys
   if love.keyboard.isDown("right") then
-    player.dir.x = 1
-    player.dir.y = 0
-    -- player.x = player.x + player.v * dt
+    player.dir = vector(1,0)
   elseif love.keyboard.isDown("left") then
-    player.dir.x = -1
-    player.dir.y = 0
-    -- player.x = player.x - player.v * dt
+    player.dir = vector(-1,0)
   elseif love.keyboard.isDown("up") then
-    player.dir.x = 0
-    player.dir.y = -1
-    -- player.y = player.y - player.v * dt
+    player.dir = vector(0,-1)
   elseif love.keyboard.isDown("down") then
-    player.dir.x = 0
-    player.dir.y = 1
-    -- player.y = player.y + player.v * dt
+    player.dir = vector(0,1)
   else
-    player.dir.x = 0
-    player.dir.y = 0
+    player.dir = vector(0,0)
   end
 
-  player.x = player.x + player.v * player.dir.x * dt
-  player.y = player.y + player.v * player.dir.y * dt
+  player.pos = player.pos + player.v * player.dir * dt
 end
 
 function love.draw()
   -- Draw the player
-  love.graphics.rectangle("line", math.floor(player.x) * unit, math.floor(player.y) * unit, unit, unit)
+  love.graphics.rectangle("line", math.floor(player.pos.x) * unit, math.floor(player.pos.y) * unit, unit, unit)
 end
