@@ -14,6 +14,8 @@ function love.update(dt)
 end
 
 function love.draw()
-  player:draw()
+  if not player:checkGridCollision(grid) then
+    player:draw()
+  end
   grid:draw()
 end

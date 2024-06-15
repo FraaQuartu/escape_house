@@ -10,6 +10,19 @@ function Player:new(x, y, size)
   self.size = size
 end
 
+function Player:checkGridCollision(grid)
+  if self.pos.x <= grid.pos.x 
+    or self.pos.x + self.size >= grid.pos.x + grid.width
+    or self.pos.y <= grid.pos.y 
+    or self.pos.y + self.size >= grid.pos.y + grid.height
+    then
+    return true
+  else
+    return false
+  end
+
+end
+
 function Player:update(dt)
   -- You can move faster by pressing space bar
   if love.keyboard.isDown("space") then
