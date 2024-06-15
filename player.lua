@@ -17,7 +17,7 @@ function Player:checkGridCollision(grid)
   self.pos_unit.y = math.floor(self.pos_unit.y)
   
   local tile = grid.tilemap[self.pos_unit.y + 1][self.pos_unit.x + 1]
-  return tile == 1
+  return tile > 0
 end
 
 function Player:resolveGridCollision(grid)
@@ -34,6 +34,7 @@ function Player:update(dt)
     self.v = self.min_v
   end
 
+  -- Save last position in order to solve collisions
   self.last_pos = self.pos
 
   -- Actual movement, by pressing arrow keys
