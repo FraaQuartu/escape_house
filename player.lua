@@ -2,6 +2,9 @@ local Player = Object:extend()
 local vector = require("vector")
 
 function Player:new(x, y, unit)
+  img = love.graphics.newImage("player.png")
+  quad = love.graphics.newQuad(0, 0, 64, 64, img)
+
   self.pos = vector(x, y)
   self.last_pos = self.pos
   self.dir = vector(0, 0)
@@ -54,7 +57,8 @@ function Player:update(dt)
 end
 
 function Player:draw()
-  love.graphics.rectangle("line", math.floor(self.pos.x / self.unit) * self.unit , math.floor(self.pos.y / self.unit) * self.unit, self.unit, self.unit)
+  -- love.graphics.rectangle("line", math.floor(self.pos.x / self.unit) * self.unit , math.floor(self.pos.y / self.unit) * self.unit, self.unit, self.unit)
+  love.graphics.draw(img, quad, math.floor(self.pos.x / self.unit) * self.unit, math.floor(self.pos.y / self.unit) * self.unit, 0, 0.5, 0.5)
 end
 
 return Player
