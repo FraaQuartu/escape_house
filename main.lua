@@ -1,6 +1,9 @@
+local player
+local unit
+
 function love.load()
   Object = require "classic"
-  require "player"
+  local Player = require "player"
   player = Player()
   
   unit = 32

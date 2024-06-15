@@ -1,7 +1,7 @@
-Player = Object:extend()
+local Player = Object:extend()
+local vector = require("vector")
 
 function Player:new()
-  vector = require("vector")
   self.pos = vector(0,0)
   self.dir = vector(0,0)
   self.min_v = 5
@@ -36,3 +36,5 @@ end
 function Player:draw(unit)
   love.graphics.rectangle("line", math.floor(self.pos.x) * unit, math.floor(self.pos.y) * unit, unit, unit)
 end
+
+return Player
