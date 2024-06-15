@@ -1,5 +1,7 @@
 local Player = Object:extend()
 local vector = require("vector")
+local img
+local quad
 
 function Player:new(x, y, unit)
   img = love.graphics.newImage("player.png")
@@ -20,7 +22,7 @@ function Player:checkGridCollision(grid)
   self.pos_unit.y = math.floor(self.pos_unit.y)
   
   local tile = grid.tilemap[self.pos_unit.y + 1][self.pos_unit.x + 1]
-  return tile > 0
+  return tile ~= 19
 end
 
 function Player:resolveGridCollision(grid)

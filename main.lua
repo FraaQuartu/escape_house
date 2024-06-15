@@ -16,6 +16,6 @@ function love.update(dt)
 end
 
 function love.draw()
-  player:draw()
   grid:draw()
+  player:draw()
 end

@@ -1,29 +1,45 @@
 local Grid = Object:extend()
 local vector = require("vector")
+local img
+local quads
 
 function Grid:new(x, y, unit)
-  self.tilemap = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 2, 2, 2, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-  }
+  img = love.graphics.newImage("tileset.png")
 
-  self.colors = {
-    {1, 1, 1},
-    {1, 0, 0},
-    {1, 0, 1},
-    {0, 0, 1},
-    {0, 1, 1}
+  width = 16
+  height = 16
+  image_width = img:getWidth()
+  image_height = img:getHeight()
+  print(image_height)
+  print(image_width)
+  quads = {}
+
+  for i=0,5 do
+    for j=0,16 do
+      --The only reason this code is split up in multiple lines
+      --is so that it fits the page
+      table.insert(quads,
+        love.graphics.newQuad(
+          j * (width),
+          i * (height),
+          width, height,
+          image_width, image_height))
+    end
+  end
+
+  self.tilemap = {
+    {83, 7, 7, 7, 7, 7, 7, 7, 7, 7, 84},
+    {42, 19, 19, 19, 19, 19, 19, 19, 19, 19, 42},
+    {42, 19, 19, 19, 19, 19, 19, 19, 19, 19, 42},
+    {42, 19, 19, 19, 19, 19, 19, 19, 19, 19, 42},
+    {42, 19, 19, 19, 19, 19, 19, 19, 19, 19, 42},
+    {42, 19, 19, 19, 19, 19, 19, 19, 19, 19, 42},
+    {42, 19, 19, 19, 19, 19, 19, 19, 19, 19, 42},
+    {42, 19, 19, 19, 19, 19, 19, 19, 19, 19, 42},
+    {42, 19, 19, 19, 19, 19, 19, 19, 19, 19, 42},
+    {42, 19, 19, 19, 19, 19, 19, 19, 19, 19, 42},
+    {42, 19, 19, 19, 19, 19, 19, 19, 19, 19, 42},
+    {85, 7, 7, 7, 7, 7, 7, 7, 7, 7, 86},
   }
 
   self.pos = vector(x, y)
@@ -38,9 +54,8 @@ function Grid:draw()
     for j,tile in ipairs(row) do
       --First check if the tile is not zero
       if tile ~= 0 then
-        -- Set the color and draw
-        love.graphics.setColor(self.colors[tile])
-        love.graphics.rectangle("fill", self.pos.x + (j-1) * self.unit, self.pos.y + (i-1) * self.unit, self.unit, self.unit)
+        --Draw the image with the correct quad
+        love.graphics.draw(img, quads[tile], self.pos.x + (j-1) * self.unit, self.pos.y + (i-1) * self.unit, 0, 2, 2)
       end 
     end
   end
