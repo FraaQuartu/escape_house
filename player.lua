@@ -1,26 +1,23 @@
 local Player = Object:extend()
 local vector = require("vector")
 
-function Player:new(x, y, size)
+function Player:new(x, y, unit)
   self.pos = vector(x, y)
   self.last_pos = self.pos
   self.dir = vector(0, 0)
   self.min_v = 50
   self.max_v = 100
   self.v = self.min_v
-  self.size = size
+  self.unit = unit
 end
 
 function Player:checkGridCollision(grid)
-  if self.pos.x <= grid.pos.x 
-    or self.pos.x + self.size >= grid.pos.x + grid.width
-    or self.pos.y <= grid.pos.y 
-    or self.pos.y + self.size >= grid.pos.y + grid.height
-    then
-    return true
-  else
-    return false
-  end
+  self.pos_unit = (self.pos - grid.pos) / self.unit
+  self.pos_unit.x = math.floor(self.pos_unit.x)
+  self.pos_unit.y = math.floor(self.pos_unit.y)
+  
+  local tile = grid.tilemap[self.pos_unit.y + 1][self.pos_unit.x + 1]
+  return tile == 1
 end
 
 function Player:resolveGridCollision(grid)
@@ -56,7 +53,7 @@ function Player:update(dt)
 end
 
 function Player:draw()
-  love.graphics.rectangle("line", math.floor(self.pos.x), math.floor(self.pos.y), self.size, self.size)
+  love.graphics.rectangle("line", math.floor(self.pos.x / self.unit) * self.unit , math.floor(self.pos.y / self.unit) * self.unit, self.unit, self.unit)
 end
 
 return Player
