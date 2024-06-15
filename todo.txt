@@ -1,5 +1,3 @@
-- Gestisci le collisioni 
-    Temporaneamente disegna il bordo della mappa come un quadrato, e fai in modo di non uscire da questa
 - Crea la tilemap
     Molto semplice per ora
     Gestisci collisioni
