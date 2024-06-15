@@ -7,9 +7,9 @@ function love.load()
 end
 
 function love.update(dt)
-  player.update(player,dt)
+  player:update(dt)
 end
 
 function love.draw()
-  player.draw(player,unit)
+  player:draw(unit)
 end

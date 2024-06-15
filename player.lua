@@ -1,6 +1,6 @@
-Player = Object.extend(Object)
+Player = Object:extend()
 
-function Player.new(self)
+function Player:new()
   vector = require("vector")
   self.pos = vector(0,0)
   self.dir = vector(0,0)
@@ -9,7 +9,7 @@ function Player.new(self)
   self.v = 5
 end
 
-function Player.update(self, dt)
+function Player:update(dt)
   -- You can move faster by pressing space bar
   if love.keyboard.isDown("space") then
     self.v = self.max_v
@@ -33,6 +33,6 @@ function Player.update(self, dt)
   self.pos = self.pos + self.v * self.dir * dt
 end
 
-function Player.draw(self, unit)
+function Player:draw(unit)
   love.graphics.rectangle("line", math.floor(self.pos.x) * unit, math.floor(self.pos.y) * unit, unit, unit)
 end
