@@ -1,12 +1,9 @@
 local player
-local unit
 
 function love.load()
   Object = require "classic"
   local Player = require "player"
-  player = Player()
-  
-  unit = 32
+  player = Player(32)
 end
 
 function love.update(dt)
@@ -14,5 +11,5 @@ function love.update(dt)
 end
 
 function love.draw()
-  player:draw(unit)
+  player:draw()
 end

@@ -1,12 +1,13 @@
 local Player = Object:extend()
 local vector = require("vector")
 
-function Player:new()
+function Player:new(size)
   self.pos = vector(0,0)
   self.dir = vector(0,0)
-  self.min_v = 5
-  self.max_v = 10
-  self.v = 5
+  self.min_v = 50
+  self.max_v = 100
+  self.v = self.min_v
+  self.size = size
 end
 
 function Player:update(dt)
@@ -33,8 +34,8 @@ function Player:update(dt)
   self.pos = self.pos + self.v * self.dir * dt
 end
 
-function Player:draw(unit)
-  love.graphics.rectangle("line", math.floor(self.pos.x) * unit, math.floor(self.pos.y) * unit, unit, unit)
+function Player:draw()
+  love.graphics.rectangle("line", math.floor(self.pos.x), math.floor(self.pos.y), self.size, self.size)
 end
 
 return Player
