@@ -1,9 +1,9 @@
 local Player = Object:extend()
 local vector = require("vector")
 
-function Player:new(size)
-  self.pos = vector(0,0)
-  self.dir = vector(0,0)
+function Player:new(x, y, size)
+  self.pos = vector(x, y)
+  self.dir = vector(0, 0)
   self.min_v = 50
   self.max_v = 100
   self.v = self.min_v
