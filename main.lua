@@ -11,11 +11,10 @@ end
 
 function love.update(dt)
   player:update(dt)
+  player:resolveGridCollision(grid)
 end
 
 function love.draw()
-  if not player:checkGridCollision(grid) then
-    player:draw()
-  end
+  player:draw()
   grid:draw()
 end

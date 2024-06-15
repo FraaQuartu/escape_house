@@ -3,6 +3,7 @@ local vector = require("vector")
 
 function Player:new(x, y, size)
   self.pos = vector(x, y)
+  self.last_pos = self.pos
   self.dir = vector(0, 0)
   self.min_v = 50
   self.max_v = 100
@@ -20,7 +21,12 @@ function Player:checkGridCollision(grid)
   else
     return false
   end
+end
 
+function Player:resolveGridCollision(grid)
+  if self:checkGridCollision(grid) then
+    self.pos = self.last_pos
+  end
 end
 
 function Player:update(dt)
@@ -30,6 +36,8 @@ function Player:update(dt)
   else
     self.v = self.min_v
   end
+
+  self.last_pos = self.pos
 
   -- Actual movement, by pressing arrow keys
   if love.keyboard.isDown("right") then
